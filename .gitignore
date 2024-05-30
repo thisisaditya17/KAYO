@@ -3,4 +3,4 @@
 .vscode
 .zshrc
 .env
-
+.DS_Store
