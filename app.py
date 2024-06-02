@@ -16,12 +16,14 @@ def upload_file():
         return 'No selected file', 400
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filepath)
-
+    processed_data = process_file(filepath)
+    return jsonify("processed content:", processed_data)
+    
     # Process the file (edit it)
     #edited_filepath = process_file(filepath)
     #just take the data from the uploads/ whatever thing and use it 
     #then put processed data here
-    return jsonify({"processed_content":"put processed data here"})
+
 
 def process_file(filepath):
     # Dummy function to simulate file processing
