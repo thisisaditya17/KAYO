@@ -1,0 +1,22 @@
+GSOC: open source contribution for 3 months
+work on open source projects for 3 months
+
+students work of projects and then companies choose the students they want to choose
+
+learn a language: javascript / typescript, C++, python, java
+
+do some open source work before gsoc so u can try
+
+do small contributions then large contributions
+
+multiple projects
+
+at the end write a proposal
+
+imp algo:
+backtracking: if wrong take step back
+BFS: Traversal layer bt layer
+binary search:
+DFS: State traversaal algo: unknown leveks then use DFS
+Daexyr Algo: 
+divide and conquer: merge sort

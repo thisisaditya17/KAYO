@@ -9,7 +9,7 @@ import faiss
 import google.generativeai as genai
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)   # Enable CORS for all routes
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -30,10 +30,11 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         return 'No selected file', 400
+    prompt = request.form.get('prompt')
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filepath)
-    processed_data = process_file(filepath)
-    return jsonify(processed_data)
+    processed_data = process_file(filepath,prompt)
+    return jsonify({"processed_content":processed_data})
     
     # Process the file (edit it)
     #edited_filepath = process_file(filepath)
@@ -83,17 +84,12 @@ def process_file(filepath, query):
             chunk_text = chunks[chunk_index]
             prompt += "Context: " + chunk_text.page_content + "\n"
     
-    reponse = llm.generate_content(prompt, max_length=1000)
-
+    reponse = llm.generate_content(prompt)
     edited_filepath = filepath.replace('uploads', 'processed')
     os.makedirs(os.path.dirname(edited_filepath), exist_ok=True)
-    with open(filepath, 'r') as f:
-        content = f.read()
-        print("hello")
-        print(content)
     with open(edited_filepath, 'w') as f:
-        f.write(content.upper())  # Example modification: converting content to uppercase
-    return edited_filepath
+        f.write(str(reponse))  # Example modification: converting content to uppercase
+    return str(reponse._result.candidates[0].content.parts[0].text)
 
 if __name__ == '__main__':
     app.run(debug=True)
