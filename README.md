@@ -64,5 +64,8 @@ cd KAYO
     ```
 
 ## Contact
-For any inquiries or issues, please contact [Aditya](joshi.adi1734@gmail.com).
+For any inquiries or issues, please contact 
+[Aditya](joshi.adi1734@gmail.com)
+[Arnav](arnav.malhotra20003@gmail.com)
+
 
