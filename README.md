@@ -35,7 +35,21 @@ cd KAYO
         ```bash
         source .venv/bin/activate
         ```
-3. Install the required Python packages:
+3. Create an environment file to store the api key
+    1. Create a **.env** file
+    2. Generate an API key from [GoogleAI for developers](https://ai.google.dev/gemini-api/docs/api-key)
+    3. Write GENAI_API_KEY="your api key"
+    4. If you still face the issue, try
+        - **Windows:**
+            ```bash
+            $env:GENAI_API_KEY=your_generated_api_key"
+            ```
+        - **Mac/Linux:**
+            ```bash
+            export GENAI_API_KEY=your_generated_api_key"
+            ```
+
+4. Install the required Python packages:
     ```bash
     pip install python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors
     ```
@@ -62,6 +76,25 @@ cd KAYO
     # Ensure you're in the OrbitalKAYO directory
     npm run dev
     ```
+
+## Running the RAG Check
+1. **Run the RAG_1.py file** to check if Retrieval-Augmented Generation (RAG) works fine:
+    ```bash
+    python RAG_1.py
+    ```
+## Running the Jupyter Trial
+- To debug the RAG, run Jupyter **trial.ipynb**
+1. **Install Jupyter Notebook** (if not already installed):
+    ```bash
+    pip install jupyter
+    ```
+2. **Start Jupyter Notebook**:
+    ```bash
+    jupyter notebook
+    ```
+3. **Open and run the trial notebook**: 
+    - Navigate to the Jupyter trial file and run the cells to ensure the system works as expected.
+
 
 ## Contact
 For any inquiries or issues, please contact 
