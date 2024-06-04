@@ -55,7 +55,7 @@ cd KAYO
     ```bash
     # Ensure you're in the KAYO directory
     # Activate the virtual environment if not already activated
-    flask run
+    python app.py
     ```
 2. **Start the frontend server**:
     ```bash
