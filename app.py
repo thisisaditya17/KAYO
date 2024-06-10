@@ -9,7 +9,7 @@ import faiss
 import google.generativeai as genai
 
 app = Flask(__name__)
-CORS(app)   # Enable CORS for all routes
+CORS(app)  # Enable CORS for particular route
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -92,4 +92,4 @@ def process_file(filepath, query):
     return str(reponse._result.candidates[0].content.parts[0].text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5001, debug=True)

@@ -2,44 +2,43 @@ response:
 GenerateContentResponse(
     done=True,
     iterator=None,
-    result=glm.GenerateContentResponse({
+    result=protos.GenerateContentResponse({
       "candidates": [
         {
           "content": {
             "parts": [
               {
-                "text": "The provided text doesn't contain any information about cakes. It mainly discusses the cultural and economic benefits of tourism between Singapore and India. \n"
+                "text": "Please provide me with the text you would like me to refer to. The provided context is a list of web addresses and does not contain information to answer what the absolute value of a number is. \n\nThe absolute value of a number is its distance from zero, regardless of direction.  It is always a positive number.  For example:\n\n* **|5| = 5** \n* **|-5| = 5**\n\nPlease provide the relevant text so I can assist you with your question. \n"
               }
             ],
             "role": "model"
           },
-          "finish_reason": 1,
+          "finish_reason": "STOP",
           "index": 0,
           "safety_ratings": [
             {
-              "category": 9,
-              "probability": 1,
-              "blocked": false
+              "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+              "probability": "NEGLIGIBLE"
             },
             {
-              "category": 8,
-              "probability": 1,
-              "blocked": false
+              "category": "HARM_CATEGORY_HATE_SPEECH",
+              "probability": "NEGLIGIBLE"
             },
             {
-              "category": 7,
-              "probability": 1,
-              "blocked": false
+              "category": "HARM_CATEGORY_HARASSMENT",
+              "probability": "NEGLIGIBLE"
             },
             {
-              "category": 10,
-              "probability": 1,
-              "blocked": false
+              "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+              "probability": "NEGLIGIBLE"
             }
-          ],
-          "token_count": 0,
-          "grounding_attributions": []
+          ]
         }
-      ]
+      ],
+      "usage_metadata": {
+        "prompt_token_count": 772,
+        "candidates_token_count": 105,
+        "total_token_count": 877
+      }
     }),
 )

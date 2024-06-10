@@ -29,6 +29,8 @@ chunk_texts = [chunk.page_content for chunk in chunks]
 
 embeddings = embedding_model.encode(chunk_texts, show_progress_bar=True)
 
+
+
 embeddings_np = numpy.array(embeddings).astype('float32') #fass takes in 
 
 
