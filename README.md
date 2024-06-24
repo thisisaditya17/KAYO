@@ -29,11 +29,15 @@ cd KAYO
 2. Activate the virtual environment:
     - **Windows:**
         ```bash
-        .\venv\Scripts\Activate.ps1
+        .venv\Scripts\Activate.ps1
         ```
     - **Mac/Linux:**
         ```bash
         source .venv/bin/activate
+        ```
+    If this issue shows up ".venv\Scripts\Activate.ps1 cannot be loaded because running scripts is disabled on this system". Execute this on command line.
+        ```bash
+        Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
         ```
 3. Create an environment file to store the api key
     1. Create a **.env** file
@@ -42,16 +46,16 @@ cd KAYO
     4. If you still face the issue, try
         - **Windows:**
             ```bash
-            $env:GENAI_API_KEY=your_generated_api_key"
+            $env:GENAI_API_KEY="your_generated_api_key"
             ```
         - **Mac/Linux:**
             ```bash
-            export GENAI_API_KEY=your_generated_api_key"
+            export GENAI_API_KEY="your_generated_api_key"
             ```
 
 4. Install the required Python packages:
     ```bash
-    pip install python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors
+    pip install pypdf python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors
     ```
 
 ### 3. Set Up Node.js Environment
