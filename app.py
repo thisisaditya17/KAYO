@@ -26,7 +26,7 @@ dbname = getDatabase()
 collection_name = dbname["userItems"]
     # Send a ping to confirm a successful connection
 app = Flask(__name__)
-CORS(app)   # Enable CORS for all routes
+CORS(app)  # Enable CORS for particular route
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -110,4 +110,4 @@ def process_file():
     return str(reponse._result.candidates[0].content.parts[0].text)
 dbname = getDatabase()
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000, debug=True)
