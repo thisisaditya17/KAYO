@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Container, Center, Heading, Flex, Stack,Button, Input} from '@chakra-ui/react'
+import {Text, FormLabel,FormControl,Box,Container, Center, Heading, Flex, Stack,Button, Input} from '@chakra-ui/react'
+import { FaCloudUploadAlt } from 'react-icons/fa';
 import axios from 'axios'
+import Chatbox from './Chatbox';
 function App() {
   
-  const [count, setCount] = useState(0)
+  const [uploaded, setUploaded] = useState(false)
   const [file, setFile] = useState(null);
   const [prompt, setPrompt] = useState("")
   const [data, setData] = useState('')
@@ -17,10 +19,10 @@ function App() {
   }
 
   const handleSubmit = async (e) => {
+    setUploaded(true)
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('prompt', prompt);
 
     try {
       const response = await axios.post('http://localhost:5000/upload', formData, {
@@ -28,7 +30,7 @@ function App() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setData( response.data.processed_content);
+      
       console.log('File uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -36,19 +38,65 @@ function App() {
   };
 
   return (
+    
 <>
+<Heading marginTop={"10px"} backgroundColor={'black'}>KAYO - AI for the future - Know it All Yield Optimizer</Heading>
+{uploaded && (
+  <>
+  <Chatbox />
+  <Button size='lg' onClick={()=>setUploaded(false)}>New File?</Button>
+  </>  
+)}
+{!uploaded && (
+  
+
 <Center width={'100vw'} height={'100vh'}>
   <Flex alignItems={'center'} >
     <Stack>
-    <Heading>KAYO - AI for the future</Heading>
-    <Heading>Know it All Yield Optimizer</Heading>
-      <Input type='text'onChange={handlePromptChange} placeholder="Enter Prompt here" size='lg'></Input>
-      <Input onChange={handleFileChange} type='file' size='sm'></Input>
+      <Heading my={"30px"} size='4xl'>Meet Kayo</Heading>
+
+      <Container>
+      <Input type='text'onChange={handlePromptChange} placeholder="Ask your first question" size='lg'></Input>
+      <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      p={4}
+      textAlign="center"
+    >
+      <FormControl>
+        <FormLabel htmlFor="file-upload" cursor="pointer">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            
+            borderWidth="2px"
+            borderStyle="dashed"
+            borderRadius="md"
+            p={4}
+            cursor="pointer"
+            _hover={{ bg: '.200' }}
+          >
+            <FaCloudUploadAlt size="24px" />
+            <Text ml={2}>Click to upload a file</Text>
+          </Box>
+        </FormLabel>
+        <Input
+          id="file-upload"
+          type="file"
+          hidden
+          onChange={handleFileChange}
+        />
+      </FormControl>
+      
+    </Box>
+      </Container>
       <Button onClick={handleSubmit}>Upload</Button>
-      <Heading>processed content: {data}</Heading>
-    </Stack>
+      </Stack>
     </Flex>
     </Center>
+    )}
    </>
   )
 }

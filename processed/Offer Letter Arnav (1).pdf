@@ -8,7 +8,7 @@ GenerateContentResponse(
           "content": {
             "parts": [
               {
-                "text": "Please provide me the complete question. The current question \"dsad\" does not make sense in the context given. I need the full question to understand what you're asking about the provided information on tourism between India and Singapore. \n"
+                "text": "The provided text does not contain the answer to the question \"fdsfdsfcxz\" as this appears to be a random string of letters with no meaning within the context. Please provide a valid question. \n"
               }
             ],
             "role": "model"
@@ -40,6 +40,11 @@ GenerateContentResponse(
           "token_count": 0,
           "grounding_attributions": []
         }
-      ]
+      ],
+      "usage_metadata": {
+        "prompt_token_count": 605,
+        "candidates_token_count": 40,
+        "total_token_count": 645
+      }
     }),
 )
