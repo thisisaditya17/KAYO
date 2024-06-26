@@ -8,7 +8,7 @@ GenerateContentResponse(
           "content": {
             "parts": [
               {
-                "text": "The provided text appears to be a resume, and you're asking if it's a good template.  It's difficult to judge the quality of a resume template based solely on plain text.  \n\nTo properly assess the template, I need to see the **visual layout and formatting**. Here's what I would look for:\n\n* **Clear Hierarchy:** Are different sections (Summary, Experience, Skills, etc.) visually distinct? Is information within each section easy to scan?\n* **Font Choice and Size:**  Is the font professional and readable? Is there a clear difference between headings and body text?\n* **Whitespace and Margins:** Does the resume look cramped or well-spaced? Are margins appropriate for printing and online viewing?\n* **Overall Aesthetics:** Does the design look modern, clean, and professional?\n\n**Please provide a visual example of the resume template (screenshot, link, etc.), and I can give you a more accurate assessment.** \n"
+                "text": "The provided text appears to be a resume for Byungjin Park. There is no mention of \"fdsf\" in the text.  Therefore, I cannot answer your question. \n"
               }
             ],
             "role": "model"
@@ -40,6 +40,11 @@ GenerateContentResponse(
           "token_count": 0,
           "grounding_attributions": []
         }
-      ]
+      ],
+      "usage_metadata": {
+        "prompt_token_count": 1120,
+        "candidates_token_count": 36,
+        "total_token_count": 1156
+      }
     }),
 )
