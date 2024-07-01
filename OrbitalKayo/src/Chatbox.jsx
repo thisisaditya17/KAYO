@@ -16,7 +16,7 @@ const Chatbox = () => {
 
   const handleQuestion = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/askQuestion', {
+      const response = await axios.post('http://localhost:5001/askQuestion', {
         stringData: input
       });
       const data = response.data
