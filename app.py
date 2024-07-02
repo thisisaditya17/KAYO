@@ -21,7 +21,7 @@ import time
 from dotenv import load_dotenv
 
 load_dotenv()
-api_key = "AIzaSyADAsholuvCPecxj8W9zj-TkZ431vtSMTc"
+api_key = "AIzaSyBLx0Pjlc6WDryRvaOAC6jVGJ7SqerK1cY"
 genai.configure(api_key=api_key)
 
 app = Flask(__name__)
@@ -98,11 +98,10 @@ def upload_file():
 @app.route("/askQuestion", methods=["POST"])
 def ask_question():
     data = request.get_json()
-    query = data.get("stringData")
-
+    query = data.get("message")
+    print(query)
     # Retrieve stored propositions
     chunk_texts = [doc["content"] for doc in collection.find()]
-
     # Generate embeddings for stored propositions
     embeddings = embedding_model.encode(chunk_texts, show_progress_bar=True)
     embeddings_np = np.array(embeddings).astype('float32')
@@ -160,7 +159,7 @@ def ask_question():
     response = llm.generate_content(refined_prompt)
 
 
-    return response.text
+    return str(response.text)
 
 if __name__ == "__main__":
     app.run(port=5001, debug=True)

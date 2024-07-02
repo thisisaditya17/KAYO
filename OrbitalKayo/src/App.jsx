@@ -56,7 +56,6 @@ function App() {
       <Heading my={"30px"} size='4xl'>Meet Kayo</Heading>
 
       <Container>
-      <Input type='text'onChange={handlePromptChange} placeholder="Ask your first question" size='lg'></Input>
       <Box
       borderWidth="1px"
       borderRadius="lg"
