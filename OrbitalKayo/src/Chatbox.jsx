@@ -17,7 +17,7 @@ const Chatbox = () => {
   const handleQuestion = async () => {
     try {
       const response = await axios.post('http://localhost:5001/askQuestion', {
-        stringData: input
+        message: input
       });
       const data = response.data
       console.log(data)
@@ -28,8 +28,9 @@ const Chatbox = () => {
     }
   };
   const handleResponse = (AItext) => {
-    setMessages((prevMessages) => [...prevMessages, { text: AItext, sender: 'You' }]);
+    setMessages((prevMessages) => [...prevMessages, { text: AItext, sender: 'KAYO' }]);
   }
+  
   return (
       <>
         <Box

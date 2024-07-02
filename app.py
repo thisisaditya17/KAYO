@@ -112,11 +112,10 @@ def upload_file():
 @app.route("/askQuestion", methods=["POST"])
 def ask_question():
     data = request.get_json()
-    query = data.get("stringData")
-
+    query = data.get("message")
+    print(query)
     # Retrieve stored propositions
     chunk_texts = [doc["content"] for doc in collection.find()]
-
     # Generate embeddings for stored propositions
     embeddings = embedding_model.encode(chunk_texts, show_progress_bar=True)
     embeddings_np = np.array(embeddings).astype("float32")
