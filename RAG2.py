@@ -15,9 +15,9 @@ import google.generativeai as genai
 import faiss 
 
 load_dotenv()
-api_key = os.getenv('GENAI_2ND_KEY')
+api_key = "AIzaSyADAsholuvCPecxj8W9zj-TkZ431vtSMTc"
 llm = ChatGoogleGenerativeAI(model='gemini-1.5-flash', google_api_key=api_key)
-text = textract.process("Research essay A0284714Y.pdf")
+text = textract.process("test.txt")
 text = text.decode('utf-8')
 obj = hub.pull("wfh/proposal-indexing")
 

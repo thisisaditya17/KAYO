@@ -21,11 +21,11 @@ import time
 from dotenv import load_dotenv
 
 load_dotenv()
-api_key = os.getenv('GENAI_2ND_KEY')
+api_key = "AIzaSyADAsholuvCPecxj8W9zj-TkZ431vtSMTc"
 genai.configure(api_key=api_key)
 
 app = Flask(__name__)
-CORS(app, resources={"/upload": {"origins": "http://localhost:5001"}, "/askQuestion": {"origins": "http://localhost:5001"}})
+CORS(app)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -34,6 +34,7 @@ uri = "mongodb+srv://arnavmalhotra:LO22V321DrzXu3L9@trialserver.ynfu9nv.mongodb.
 
 def get_database():
     client = MongoClient(uri, server_api=ServerApi("1"))
+    print("made database")
     return client["userUploadedData"]
 
 db = get_database()
@@ -87,7 +88,7 @@ def upload_file():
         text_propositions.extend(propositions)
         print(f"Done with {i}")
         time.sleep(8)
-
+    print("working")
     # Insert propositions into MongoDB
     proposition_docs = [{"content": prop} for prop in text_propositions]
     collection.insert_many(proposition_docs)
@@ -138,8 +139,10 @@ def ask_question():
     Don’t give information not mentioned in the CONTEXT INFORMATION.
     Do not say "according to the context" or "mentioned in the context" or similar.
     """)
-
     prompt = prompt_template.format(context=retrieved_context, question=query)
+    genai.configure(api_key=api_key)
+
+    llm = genai.GenerativeModel('gemini-1.5-pro')
     response = llm.generate_content(prompt)
 
     refined_prompt_template = ChatPromptTemplate.from_template("""
@@ -152,11 +155,12 @@ def ask_question():
     Given the new context, refine the original answer to better answer the query. If the context isn't useful, return the original answer.
     Don't mention Refined Answer
     """)
+    refined_prompt = refined_prompt_template.format(query=query, existing_answer=response.text, context=retrieved_context)
 
-    refined_prompt = refined_prompt_template.format(query=query, existing_answer=response["candidates"][0]["content"]["parts"][0]["text"], context=retrieved_context)
-    refined_response = llm.generate_content(refined_prompt)
+    response = llm.generate_content(refined_prompt)
 
-    return refined_response["candidates"][0]["content"]["parts"][0]["text"]
+
+    return response.text
 
 if __name__ == "__main__":
     app.run(port=5001, debug=True)

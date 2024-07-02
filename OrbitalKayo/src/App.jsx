@@ -31,7 +31,7 @@ function App() {
         },
       });
       
-      console.log('File uploaded successfully:', response.data);
+      console.log('File uploaded successfully:', response);
     } catch (error) {
       console.error('Error uploading file:', error);
     }
