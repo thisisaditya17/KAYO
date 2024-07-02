@@ -43,7 +43,8 @@ cd KAYO
     1. Create a **.env** file
     2. Generate an API key from [GoogleAI for developers](https://ai.google.dev/gemini-api/docs/api-key)
     3. Write GENAI_API_KEY="your api key"
-    4. If you still face the issue, try
+    4. Add another new API key as GENAI_2ND_KEY="other api key"
+    5. If you still face the issue, try
         - **Windows:**
             ```bash
             $env:GENAI_API_KEY="your_generated_api_key"
@@ -55,7 +56,7 @@ cd KAYO
 
 4. Install the required Python packages:
     ```bash
-    pip install pypdf python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors
+    pip install python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors pymongo textract langchain_core langchain_google_genai langchainhub
     ```
 
 ### 3. Set Up Node.js Environment
