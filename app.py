@@ -183,7 +183,7 @@ def ask_question():
     )
     response = llm.generate_content(refined_prompt)
 
-    return response.text
+    return str(response.text)
 
 
 if __name__ == "__main__":
