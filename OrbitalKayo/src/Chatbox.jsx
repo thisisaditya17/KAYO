@@ -28,8 +28,9 @@ const Chatbox = () => {
     }
   };
   const handleResponse = (AItext) => {
-    setMessages((prevMessages) => [...prevMessages, { text: AItext, sender: 'You' }]);
+    setMessages((prevMessages) => [...prevMessages, { text: AItext, sender: 'KAYO' }]);
   }
+  
   return (
       <>
         <Box

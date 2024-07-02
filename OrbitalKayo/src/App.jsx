@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import {Text, FormLabel,FormControl,Box,Container, Center, Heading, Flex, Stack,Button, Input} from '@chakra-ui/react'
+import {Text, FormLabel,FormControl,Box,Container, Center, Heading, Flex, Stack,Button, Input, HStack} from '@chakra-ui/react'
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import axios from 'axios'
 import Chatbox from './Chatbox';
@@ -11,8 +11,11 @@ function App() {
   const [file, setFile] = useState(null);
   const [prompt, setPrompt] = useState("")
   const [data, setData] = useState('')
+  const [fileName, setFileName] = useState('');
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setFileName(event.target.files[0].name);
+
   };
   const handlePromptChange = (e) => {
     setPrompt(e.target.value)
@@ -40,7 +43,9 @@ function App() {
   return (
     
 <>
-<Heading marginTop={"10px"} backgroundColor={'black'}>KAYO - AI for the future - Know it All Yield Optimizer</Heading>
+<Heading marginTop={"10px"} backgroundColor={'black'} textAlign={'center'}>
+  <Text>KAYO - Know it All Yield Optimizer</Text>
+  </Heading>
 {uploaded && (
   <>
   <Chatbox />
@@ -77,8 +82,16 @@ function App() {
             cursor="pointer"
             _hover={{ bg: '.200' }}
           >
-            <FaCloudUploadAlt size="24px" />
-            <Text ml={2}>Click to upload a file</Text>
+            <Stack>
+            <HStack>
+            <Text ml={2}>Click to upload a file </Text>
+
+            </HStack>
+              
+            {fileName && (
+        <Text textAlign={'center'} mt={2}>{fileName}</Text>
+      )}
+            </Stack>
           </Box>
         </FormLabel>
         <Input
