@@ -30,7 +30,7 @@ uri = "mongodb+srv://arnavmalhotra:LO22V321DrzXu3L9@trialserver.ynfu9nv.mongodb.
 
 
 def get_database():
-    client = MongoClient(uri, server_api=ServerApi("1"), ssl_cert_reqs=ssl.CERT_NONE)
+    client = MongoClient(uri, server_api=ServerApi("1"))
     print("made database")
     return client["userUploadedData"]
 
