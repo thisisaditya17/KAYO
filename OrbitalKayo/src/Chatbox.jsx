@@ -19,7 +19,7 @@ const Chatbox = () => {
   const handleQuestion = async () => {
     try {
       const response = await axios.post('http://localhost:5001/askQuestion', {
-        message: input
+        message: input,
       });
       const data = response.data;
       handleResponse(data);
@@ -27,7 +27,7 @@ const Chatbox = () => {
     } catch (error) {
       toast({
         title: 'Error',
-        description: "There was an error sending your message.",
+        description: 'There was an error sending your message.',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -41,7 +41,7 @@ const Chatbox = () => {
   };
 
   return (
-    <Flex direction="column" h="100%" w="100%" p={4}>
+    <Flex direction="column" h="100%" w="100%" p={4} bg="gray.900">
       <Box
         flex="1"
         w="100%"
@@ -50,17 +50,17 @@ const Chatbox = () => {
         borderRadius="md"
         p={4}
         boxShadow="inner"
-        bg="gray.50"
+        bg="gray.800"
       >
         <VStack spacing={4} align="start">
           {messages.map((message, index) => (
             <HStack key={index} align="start" spacing={2} w="100%">
               <Avatar size="sm" name={message.sender} />
-              <Box bg={message.sender === 'You' ? 'teal.100' : 'gray.100'} p={3} borderRadius="md" w="full">
-                <Text fontSize="sm" fontWeight="bold" color={message.sender === 'You' ? 'teal.800' : 'gray.800'}>
+              <Box bg={message.sender === 'You' ? 'orange.300' : 'gray.700'} p={3} borderRadius="md" w="full">
+                <Text fontSize="sm" fontWeight="bold" color={message.sender === 'You' ? 'black' : 'orange.300'}>
                   {message.sender}
                 </Text>
-                <Text fontSize="md" color={message.sender === 'You' ? 'teal.800' : 'gray.800'}>{message.text}</Text>
+                <Text fontSize="md" color={message.sender === 'You' ? 'black' : 'orange.300'}>{message.text}</Text>
               </Box>
             </HStack>
           ))}
@@ -72,8 +72,10 @@ const Chatbox = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          bg="gray.700"
+          color="orange.300"
         />
-        <Button onClick={handleSend} colorScheme="teal" rightIcon={<FaPaperPlane />}>
+        <Button onClick={handleSend} colorScheme="orange" rightIcon={<FaPaperPlane />}>
           Send
         </Button>
       </HStack>

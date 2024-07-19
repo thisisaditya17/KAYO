@@ -1,18 +1,24 @@
 import { useState } from 'react';
-import { Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button, Input, HStack, Icon, VStack, useToast } from '@chakra-ui/react';
+import { Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button, Input, VStack, Select, useToast, IconButton, Divider } from '@chakra-ui/react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
+import { AiOutlineUpload } from 'react-icons/ai';
 import axios from 'axios';
 import Chatbox from './Chatbox';
 
-function App() {
+const App = () => {
   const [uploaded, setUploaded] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [mode, setMode] = useState('');
   const toast = useToast();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
+  };
+
+  const handleModeChange = (e) => {
+    setMode(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -27,10 +33,21 @@ function App() {
       });
       return;
     }
+    if (!mode) {
+      toast({
+        title: 'No mode selected.',
+        description: 'Please select a mode before uploading.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
 
     setUploaded(true);
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('mode', mode);
 
     try {
       const response = await axios.post('http://localhost:5001/upload', formData, {
@@ -61,49 +78,68 @@ function App() {
 
   return (
     <>
-      <Heading marginTop="10px" backgroundColor="black" textAlign="center" color="white" padding="20px">
-        KAYO - Know it All Yield Optimizer
-      </Heading>
+      <Box bg="black" color="orange.400" py={6}>
+        <Heading as="h1" textAlign="center" fontSize="4xl">
+          KAYO - Know-It-All Yield Optimizer
+        </Heading>
+      </Box>
       {uploaded ? (
         <>
           <Chatbox />
-          <Center marginTop="20px">
-            <Button size="lg" onClick={() => setUploaded(false)}>
+          <Center mt={10}>
+            <Button size="lg" colorScheme="orange" onClick={() => setUploaded(false)}>
               Upload New File
             </Button>
           </Center>
         </>
       ) : (
-        <Center width="100vw" height="100vh" backgroundColor="gray.100">
-          <Flex alignItems="center">
-            <Stack spacing={8} padding={8} backgroundColor="white" boxShadow="lg" borderRadius="md">
-              <Heading size="2xl" textAlign="center" color="teal.500">
-                Meet Kayo
-              </Heading>
-              <Container centerContent>
-                <Box borderWidth="2px" borderRadius="lg" overflow="hidden" padding={4} textAlign="center" borderColor="gray.200">
-                  <FormControl>
-                    <FormLabel htmlFor="file-upload" cursor="pointer">
-                      <VStack spacing={4}>
-                        <Icon as={FaCloudUploadAlt} w={12} h={12} color="gray.500" />
-                        <Text fontSize="lg" color="gray.500">
-                          {fileName ? `File: ${fileName}` : 'Click to upload a file'}
-                        </Text>
-                      </VStack>
-                    </FormLabel>
-                    <Input id="file-upload" type="file" hidden onChange={handleFileChange} />
-                  </FormControl>
-                </Box>
-              </Container>
-              <Button colorScheme="teal" size="lg" onClick={handleSubmit} isDisabled={!file}>
-                {fileName ? 'Upload Selected File' : 'Upload'}
-              </Button>
-            </Stack>
+        <Center w="100vw" h="100vh" bg="gray.900">
+          <Flex direction="column" alignItems="center" w="full" maxW="xl" p={6} bg="gray.800" boxShadow="2xl" borderRadius="lg">
+            <Heading as="h2" size="xl" color="orange.400" textAlign="center" mb={6}>
+              Meet Kayo
+            </Heading>
+            <Divider mb={6} borderColor="orange.400" />
+            <FormControl>
+              <FormLabel htmlFor="file-upload" cursor="pointer" textAlign="center" color="orange.400">
+                <VStack spacing={4}>
+                  <IconButton
+                    icon={<AiOutlineUpload />}
+                    size="lg"
+                    colorScheme="orange"
+                    aria-label="Upload File"
+                    isRound
+                  />
+                  <Text fontSize="lg" color="orange.400">
+                    {fileName ? `File: ${fileName}` : 'Click to upload a file'}
+                  </Text>
+                </VStack>
+              </FormLabel>
+              <Input id="file-upload" type="file" hidden onChange={handleFileChange} />
+            </FormControl>
+            <FormControl mt={6}>
+              <FormLabel color="orange.400">Select Mode</FormLabel>
+              <Select placeholder="Select mode" onChange={handleModeChange} value={mode} bg="gray.700" color="orange.400">
+                <option style={{ backgroundColor: 'gray.800' }} value="finance">Finance</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="school_work">School Work</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="legal">Legal</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="custom">Custom</option>
+              </Select>
+            </FormControl>
+            <Button
+              mt={6}
+              colorScheme="orange"
+              size="lg"
+              onClick={handleSubmit}
+              isDisabled={!file || !mode}
+              leftIcon={<FaCloudUploadAlt />}
+            >
+              {fileName ? 'Upload Selected File' : 'Upload'}
+            </Button>
           </Flex>
         </Center>
       )}
     </>
   );
-}
+};
 
 export default App;
