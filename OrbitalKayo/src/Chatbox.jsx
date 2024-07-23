@@ -7,7 +7,7 @@ const Chatbox = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const toast = useToast();
-
+  
   const handleSend = () => {
     if (input.trim() !== '') {
       setMessages((prevMessages) => [...prevMessages, { text: input, sender: 'You' }]);

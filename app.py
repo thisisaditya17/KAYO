@@ -28,7 +28,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # MongoDB Configuration
 uri = "mongodb+srv://arnavmalhotra:LO22V321DrzXu3L9@trialserver.ynfu9nv.mongodb.net/?appName=TrialServer"
 
-
+#Where to take 
 def get_database():
     client = MongoClient(uri, server_api=ServerApi("1"))
     print("made database")

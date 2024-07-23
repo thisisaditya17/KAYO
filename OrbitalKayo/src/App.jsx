@@ -1,9 +1,21 @@
+import React from 'react';
 import { useState } from 'react';
-import { Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button, Input, VStack, Select, useToast, IconButton, Divider } from '@chakra-ui/react';
+import { Text, FormLabel, FormControl,
+   Box, Container, Center, Heading, Flex, Stack, Button, Input, VStack, Select, useToast, 
+   Modal,
+   ModalOverlay,
+   ModalContent,
+   ModalHeader,
+   ModalFooter,
+   ModalBody,
+   ModalCloseButton,
+   useDisclosure,
+  IconButton, Divider } from '@chakra-ui/react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { AiOutlineUpload } from 'react-icons/ai';
 import axios from 'axios';
 import Chatbox from './Chatbox';
+import emailjs from '@emailjs/browser';
 
 const App = () => {
   const [uploaded, setUploaded] = useState(false);
@@ -11,13 +23,38 @@ const App = () => {
   const [fileName, setFileName] = useState('');
   const [mode, setMode] = useState('');
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [feedback, setFeedback] = useState('');
+  const [message, setMessage] = useState('');
+  const feedbackSubmit = (event) => {
+    event.preventDefault();
 
+    const templateParams = {
+        feedback: feedback,
+    };
+
+    emailjs.send(
+        'service_biojftn',    // Replace with your EmailJS service ID
+        'template_9bpo5wc',   // Replace with your EmailJS template ID
+        templateParams,
+        'OZAd35iWOpMHYUYx_'        // Replace with your EmailJS user ID
+    )
+    .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setMessage('Feedback submitted successfully!');
+        onClose(); // Close the modal after submitting the form
+    }, (err) => {
+        console.log('FAILED...', err);
+        setMessage('Failed to submit feedback.');
+    });
+};
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
 
   const handleModeChange = (e) => {
+    console.log(e.target.value)
     setMode(e.target.value);
   };
 
@@ -135,9 +172,41 @@ const App = () => {
             >
               {fileName ? 'Upload Selected File' : 'Upload'}
             </Button>
+            <Button onClick={onOpen}>Give Feedback</Button>
+
           </Flex>
         </Center>
       )}
+
+<Modal isOpen={isOpen} onClose={onClose}>
+    <ModalOverlay />
+    <ModalContent>
+        <ModalHeader>Submit Feedback</ModalHeader>
+        <ModalCloseButton />
+        <form onSubmit={feedbackSubmit}>
+            <ModalBody>
+                <FormControl>
+                    <FormLabel htmlFor="feedback">Feedback</FormLabel>
+                    <Input
+                        id="feedback"
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                        placeholder="Enter your feedback"
+                    />
+                </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+                <Button colorScheme="blue" mr={3} type="submit">
+                    Submit
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+            </ModalFooter>
+        </form>
+    </ModalContent>
+</Modal>
+
+{message && <Box mt={4}>{message}</Box>}
     </>
   );
 };
