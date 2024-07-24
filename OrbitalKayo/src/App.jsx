@@ -81,6 +81,8 @@ const App = () => {
     formData.append('file', file)
     formData.append('mode', mode)
     setLoading(true)
+    setUploaded(true)
+
     try {
       const response = await axios.post('http://localhost:5001/upload', formData, {
         headers: {
@@ -96,8 +98,7 @@ const App = () => {
         isClosable: true,
       })
       console.log('File uploaded successfully:', response)
-      setUploaded(true)
-    } catch (error) {
+    } catch (error) { 
       toast({
         title: 'Error uploading file.',
         description: error.message,

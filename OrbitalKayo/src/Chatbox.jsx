@@ -3,6 +3,7 @@ import { Box, Input, Button, VStack, HStack, Text, Avatar, Flex, useToast } from
 import { FaPaperPlane } from 'react-icons/fa';
 import axios from 'axios';
 
+
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -41,7 +42,9 @@ const Chatbox = () => {
   };
 
   return (
-    <Flex direction="column" h="100%" w="100%" p={4} bg="gray.900">
+    <>
+
+    <Flex direction="column" h="50vh" w="100%" p={4} bg="gray.900">
       <Box
         flex="1"
         w="100%"
@@ -80,6 +83,7 @@ const Chatbox = () => {
         </Button>
       </HStack>
     </Flex>
+    </>
   );
 };
 

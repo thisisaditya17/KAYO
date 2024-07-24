@@ -32,6 +32,10 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+body {
+  background-color: lightblue; /* Change this to your desired color */
+}
+
 
 .card {
   padding: 2em;
