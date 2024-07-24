@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "amqplib": "^0.10.4",
@@ -38,7 +39,7 @@
     "@babel/preset-react": "^7.24.7",
     "@jest/globals": "^29.7.0",
     "@testing-library/dom": "^10.3.2",
-    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

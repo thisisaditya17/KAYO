@@ -1,16 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { Text, FormLabel, FormControl,
-   Box, Container, Center, Heading, Flex, Stack, Button, Input, VStack, Select, useToast, 
-   Modal,
-   ModalOverlay,
-   ModalContent,
-   ModalHeader,
-   ModalFooter,
-   ModalBody,
-   ModalCloseButton,
-   useDisclosure,
-  IconButton, Divider } from '@chakra-ui/react';
+import { 
+  Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button, 
+  Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, 
+  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider 
+} from '@chakra-ui/react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { AiOutlineUpload } from 'react-icons/ai';
 import axios from 'axios';
@@ -26,6 +20,7 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [feedback, setFeedback] = useState('');
   const [message, setMessage] = useState('');
+
   const feedbackSubmit = (event) => {
     event.preventDefault();
 
@@ -47,14 +42,14 @@ const App = () => {
         console.log('FAILED...', err);
         setMessage('Failed to submit feedback.');
     });
-};
+  };
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
 
   const handleModeChange = (e) => {
-    console.log(e.target.value)
     setMode(e.target.value);
   };
 
@@ -156,10 +151,9 @@ const App = () => {
             <FormControl mt={6}>
               <FormLabel color="orange.400">Select Mode</FormLabel>
               <Select placeholder="Select mode" onChange={handleModeChange} value={mode} bg="gray.700" color="orange.400">
-                <option style={{ backgroundColor: 'gray.800' }} value="finance">Finance</option>
-                <option style={{ backgroundColor: 'gray.800' }} value="school_work">School Work</option>
-                <option style={{ backgroundColor: 'gray.800' }} value="legal">Legal</option>
-                <option style={{ backgroundColor: 'gray.800' }} value="custom">Custom</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="general">General</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="school">School Work</option>
+                <option style={{ backgroundColor: 'gray.800' }} value="legal">Legal Advice</option>
               </Select>
             </FormControl>
             <Button
@@ -172,41 +166,40 @@ const App = () => {
             >
               {fileName ? 'Upload Selected File' : 'Upload'}
             </Button>
-            <Button onClick={onOpen}>Give Feedback</Button>
-
+            <Button mt={4} colorScheme="orange" onClick={onOpen}>Give Feedback</Button>
           </Flex>
         </Center>
       )}
 
-<Modal isOpen={isOpen} onClose={onClose}>
-    <ModalOverlay />
-    <ModalContent>
-        <ModalHeader>Submit Feedback</ModalHeader>
-        <ModalCloseButton />
-        <form onSubmit={feedbackSubmit}>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Submit Feedback</ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={feedbackSubmit}>
             <ModalBody>
-                <FormControl>
-                    <FormLabel htmlFor="feedback">Feedback</FormLabel>
-                    <Input
-                        id="feedback"
-                        value={feedback}
-                        onChange={(e) => setFeedback(e.target.value)}
-                        placeholder="Enter your feedback"
-                    />
-                </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="feedback">Feedback</FormLabel>
+                <Input
+                  id="feedback"
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                  placeholder="Enter your feedback"
+                />
+              </FormControl>
             </ModalBody>
 
             <ModalFooter>
-                <Button colorScheme="blue" mr={3} type="submit">
-                    Submit
-                </Button>
-                <Button onClick={onClose}>Cancel</Button>
+              <Button colorScheme="blue" mr={3} type="submit">
+                Submit
+              </Button>
+              <Button onClick={onClose}>Cancel</Button>
             </ModalFooter>
-        </form>
-    </ModalContent>
-</Modal>
+          </form>
+        </ModalContent>
+      </Modal>
 
-{message && <Box mt={4}>{message}</Box>}
+      {message && <Box mt={4} color="white" textAlign="center">{message}</Box>}
     </>
   );
 };

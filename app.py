@@ -63,9 +63,7 @@ prompt_template = ChatPromptTemplate.from_messages(
     [
         ("system", "You are an AI assistant that extracts key propositions from text."),
         ("human", "Extract key propositions from the following text:\n\n{text}"),
-        (
-            "human",
-            "Format your response as a JSON object with a 'sentences' key containing a list of proposition strings.",
+        ("human","Format your response as a JSON object with a 'sentences' key containing a list of proposition strings.",
         ),
     ]
 )
@@ -86,7 +84,7 @@ def get_propositions(text):
 def upload_file():
     if "file" not in request.files:
         return "No file part", 400
-    file = request.files["file"]
+    file = request.files["file"] #getting input of the file
     if file.filename == "":
         return "No selected file", 400
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
@@ -113,6 +111,7 @@ def upload_file():
 def ask_question():
     data = request.get_json()
     query = data.get("message")
+    mode = data.get("mode", "general") #getting input from mode button
     print(query)
     # Retrieve stored propositions
     chunk_texts = [doc["content"] for doc in collection.find()]
@@ -141,20 +140,67 @@ def ask_question():
     print(retrieved_context)
 
     # Prompt template for generating answers
-    prompt_template = ChatPromptTemplate.from_template(
+    if (mode == "general"):
+        prompt_template = ChatPromptTemplate.from_template(
+            """
+        Answer the following question based on the provided context:
+
+        Question: {question}
+
+        Context: {context}
+
+        Provide relevant answers to the question based on the context.
+        Don’t justify your answers.
+        Don’t give information not mentioned in the CONTEXT INFORMATION.
+        Do not say "according to the context" or "mentioned in the context" or similar.
         """
-    Answer the following question based on the provided context:
+        )
+    elif (mode == "school"):
+        prompt_template =  ChatPromptTemplate.from_template("""
+        ### Student Doubt Solver
 
-    Question: {question}
+        You are a knowledgeable tutor. Answer the following query based on the provided context.
 
-    Context: {context}
+        **Query:**
+        {question}
 
-    Provide relevant answers to the question based on the context.
-    Don’t justify your answers.
-    Don’t give information not mentioned in the CONTEXT INFORMATION.
-    Do not say "according to the context" or "mentioned in the context" or similar.
-    """
-    )
+        **Context:**
+        {context}
+
+        ### Instructions:
+        - Provide a clear and concise answer to the query.
+        - Explain concepts in an easy-to-understand manner.
+        - Include relevant examples or additional information based on the context.
+        - Offer tips or additional resources that could help the student.
+        - Avoid including information that is out of the context of the query.
+        - Do not go beyond the scope of the context.
+        - Avoid using overly technical language unless necessary, and provide explanations for any technical terms used.
+
+        """
+        )
+    elif (mode == "legal"):
+        prompt_template = ChatPromptTemplate.from_template("""
+        ### Legal Assistance Query
+
+        You are a legal assistant. Answer the following query based on the provided context.                                                     
+
+        **Query:**
+        {question}
+
+        **Context:**
+        {context}
+
+        ### Instructions:
+        - Provide a clear and concise answer to the query.
+        - Add relevant information based on the context.
+        - Mention additional facts or details that are not included in the context. 
+        - Do not include irrelevant information that is out of context of the query.
+        - Do not go beyond the scope of the context.
+        - Do not provide output that does not contain the context.
+        - Avoid phrases like "according to the context" or similar.
+                                                         
+        """)
+
     prompt = prompt_template.format(context=retrieved_context, question=query)
     #Other API key confirguration
     api_key = os.getenv("GENAI_API_KEY")
