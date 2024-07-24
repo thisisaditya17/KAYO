@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {
   Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button,
   Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
-  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image
+  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Spinner
 } from '@chakra-ui/react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { AiOutlineUpload } from 'react-icons/ai'
@@ -20,6 +20,7 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [feedback, setFeedback] = useState('')
   const [message, setMessage] = useState('')
+  const [isLoading, setLoading] = useState(false)
 
   const feedbackSubmit = (event) => {
     event.preventDefault()
@@ -76,11 +77,10 @@ const App = () => {
       return
     }
 
-    setUploaded(true)
     const formData = new FormData()
     formData.append('file', file)
     formData.append('mode', mode)
-
+    setLoading(true)
     try {
       const response = await axios.post('http://localhost:5001/upload', formData, {
         headers: {
@@ -96,6 +96,7 @@ const App = () => {
         isClosable: true,
       })
       console.log('File uploaded successfully:', response)
+      setUploaded(true)
     } catch (error) {
       toast({
         title: 'Error uploading file.',
@@ -105,11 +106,16 @@ const App = () => {
         isClosable: true,
       })
       console.error('Error uploading file:', error)
+    } finally {
+      setLoading(false)
+
     }
   }
 
   return (
     <>
+
+      
       <Box bg="gray.900" color="orange.400" py={6}>
         <Heading as="h1" textAlign="center" fontSize="4xl">
           KAYO - Know-It-All Yield Optimizer
@@ -169,6 +175,15 @@ const App = () => {
             >
               {fileName ? 'Upload Selected File' : 'Upload'}
             </Button>
+            {isLoading && 
+            <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+            />
+    }
             <Button mt={4} colorScheme="orange" onClick={onOpen}>Give Feedback</Button>
           </Flex>
         </Center>
