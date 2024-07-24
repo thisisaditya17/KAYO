@@ -1,32 +1,32 @@
-import React from 'react';
-import { useState } from 'react';
-import { 
-  Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button, 
-  Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, 
-  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider 
-} from '@chakra-ui/react';
-import { FaCloudUploadAlt } from 'react-icons/fa';
-import { AiOutlineUpload } from 'react-icons/ai';
-import axios from 'axios';
-import Chatbox from './Chatbox';
-import emailjs from '@emailjs/browser';
+import React from 'react'
+import { useState } from 'react'
+import {
+  Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button,
+  Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
+  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image
+} from '@chakra-ui/react'
+import { FaCloudUploadAlt } from 'react-icons/fa'
+import { AiOutlineUpload } from 'react-icons/ai'
+import axios from 'axios'
+import Chatbox from './Chatbox'
+import emailjs from '@emailjs/browser'
 
 const App = () => {
-  const [uploaded, setUploaded] = useState(false);
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState('');
-  const [mode, setMode] = useState('');
-  const toast = useToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [feedback, setFeedback] = useState('');
-  const [message, setMessage] = useState('');
+  const [uploaded, setUploaded] = useState(false)
+  const [file, setFile] = useState(null)
+  const [fileName, setFileName] = useState('')
+  const [mode, setMode] = useState('')
+  const toast = useToast()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [feedback, setFeedback] = useState('')
+  const [message, setMessage] = useState('')
 
   const feedbackSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const templateParams = {
         feedback: feedback,
-    };
+    }
 
     emailjs.send(
         'service_biojftn',    // Replace with your EmailJS service ID
@@ -35,26 +35,26 @@ const App = () => {
         'OZAd35iWOpMHYUYx_'        // Replace with your EmailJS user ID
     )
     .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setMessage('Feedback submitted successfully!');
-        onClose(); // Close the modal after submitting the form
+        console.log('SUCCESS!', response.status, response.text)
+        setMessage('Feedback submitted successfully!')
+        onClose() // Close the modal after submitting the form
     }, (err) => {
-        console.log('FAILED...', err);
-        setMessage('Failed to submit feedback.');
-    });
-  };
+        console.log('FAILED...', err)
+        setMessage('Failed to submit feedback.')
+    })
+  }
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
-  };
+    setFile(e.target.files[0])
+    setFileName(e.target.files[0].name)
+  }
 
   const handleModeChange = (e) => {
-    setMode(e.target.value);
-  };
+    setMode(e.target.value)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!file) {
       toast({
         title: 'No file selected.',
@@ -62,8 +62,8 @@ const App = () => {
         status: 'warning',
         duration: 3000,
         isClosable: true,
-      });
-      return;
+      })
+      return
     }
     if (!mode) {
       toast({
@@ -72,21 +72,21 @@ const App = () => {
         status: 'warning',
         duration: 3000,
         isClosable: true,
-      });
-      return;
+      })
+      return
     }
 
-    setUploaded(true);
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('mode', mode);
+    setUploaded(true)
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('mode', mode)
 
     try {
       const response = await axios.post('http://localhost:5001/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      });
+      })
 
       toast({
         title: 'File uploaded successfully.',
@@ -94,8 +94,8 @@ const App = () => {
         status: 'success',
         duration: 3000,
         isClosable: true,
-      });
-      console.log('File uploaded successfully:', response);
+      })
+      console.log('File uploaded successfully:', response)
     } catch (error) {
       toast({
         title: 'Error uploading file.',
@@ -103,17 +103,20 @@ const App = () => {
         status: 'error',
         duration: 3000,
         isClosable: true,
-      });
-      console.error('Error uploading file:', error);
+      })
+      console.error('Error uploading file:', error)
     }
-  };
+  }
 
   return (
     <>
-      <Box bg="black" color="orange.400" py={6}>
+      <Box bg="gray.900" color="orange.400" py={6}>
         <Heading as="h1" textAlign="center" fontSize="4xl">
           KAYO - Know-It-All Yield Optimizer
         </Heading>
+        <Center mt={4}>
+          <Image src="../assests/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150" />
+        </Center>
       </Box>
       {uploaded ? (
         <>
@@ -125,7 +128,7 @@ const App = () => {
           </Center>
         </>
       ) : (
-        <Center w="100vw" h="100vh" bg="gray.900">
+        <Center w="100vw" h="78vh" bg="gray.900" py={10}>
           <Flex direction="column" alignItems="center" w="full" maxW="xl" p={6} bg="gray.800" boxShadow="2xl" borderRadius="lg">
             <Heading as="h2" size="xl" color="orange.400" textAlign="center" mb={6}>
               Meet Kayo
@@ -201,7 +204,7 @@ const App = () => {
 
       {message && <Box mt={4} color="white" textAlign="center">{message}</Box>}
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
