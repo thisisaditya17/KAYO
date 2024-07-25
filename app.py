@@ -63,8 +63,7 @@ prompt_template = ChatPromptTemplate.from_messages(
     [
         ("system", "You are an AI assistant that extracts key propositions from text."),
         ("human", "Extract key propositions from the following text:\n\n{text}"),
-        ("human","Format your response as a JSON object with a 'sentences' key containing a list of proposition strings.",
-        ),
+        ("human","Format your response as a JSON object with a 'sentences' key containing a list of proposition strings.")
     ]
 )
 
@@ -101,8 +100,8 @@ def upload_file():
         time.sleep(8)
     print("working")
     # Insert propositions into MongoDB
-    proposition_docs = [{"content": prop} for prop in text_propositions]
-    collection.insert_many(proposition_docs)
+    #proposition_docs = [{"content": prop} for prop in text_propositions]
+    #collection.insert_many(proposition_docs)
 
     return jsonify({"processed_content": "sent content"})
 
