@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {
   Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button,
   Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
-  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Spinner
+  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Progress
 } from '@chakra-ui/react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { AiOutlineUpload } from 'react-icons/ai'
@@ -26,23 +26,23 @@ const App = () => {
     event.preventDefault()
 
     const templateParams = {
-        feedback: feedback,
+      feedback: feedback,
     }
 
     emailjs.send(
-        'service_biojftn',    // Replace with your EmailJS service ID
-        'template_9bpo5wc',   // Replace with your EmailJS template ID
-        templateParams,
-        'OZAd35iWOpMHYUYx_'        // Replace with your EmailJS user ID
+      'service_biojftn',    // Replace with your EmailJS service ID
+      'template_9bpo5wc',   // Replace with your EmailJS template ID
+      templateParams,
+      'OZAd35iWOpMHYUYx_'        // Replace with your EmailJS user ID
     )
-    .then((response) => {
+      .then((response) => {
         console.log('SUCCESS!', response.status, response.text)
         setMessage('Feedback submitted successfully!')
         onClose() // Close the modal after submitting the form
-    }, (err) => {
+      }, (err) => {
         console.log('FAILED...', err)
         setMessage('Failed to submit feedback.')
-    })
+      })
   }
 
   const handleFileChange = (e) => {
@@ -81,8 +81,6 @@ const App = () => {
     formData.append('file', file)
     formData.append('mode', mode)
     setLoading(true)
-    setUploaded(true)
-
     try {
       const response = await axios.post('http://localhost:5001/upload', formData, {
         headers: {
@@ -98,7 +96,8 @@ const App = () => {
         isClosable: true,
       })
       console.log('File uploaded successfully:', response)
-    } catch (error) { 
+      setUploaded(true)
+    } catch (error) {
       toast({
         title: 'Error uploading file.',
         description: error.message,
@@ -109,20 +108,17 @@ const App = () => {
       console.error('Error uploading file:', error)
     } finally {
       setLoading(false)
-
     }
   }
 
   return (
     <>
-
-      
       <Box bg="gray.900" color="orange.400" py={6}>
         <Heading as="h1" textAlign="center" fontSize="4xl">
           KAYO - Know-It-All Yield Optimizer
         </Heading>
         <Center mt={4}>
-          <Image src="../assests/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150" />
+          <Image src="../assets/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150px" />
         </Center>
       </Box>
       {uploaded ? (
@@ -177,14 +173,8 @@ const App = () => {
               {fileName ? 'Upload Selected File' : 'Upload'}
             </Button>
             {isLoading && 
-            <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-            />
-    }
+              <Progress size="lg" colorScheme="orange" isIndeterminate width="100%" mt={4} />
+            }
             <Button mt={4} colorScheme="orange" onClick={onOpen}>Give Feedback</Button>
           </Flex>
         </Center>
