@@ -66,7 +66,7 @@ cd KAYO
     ```
 2. Install the required Node.js packages:
     ```bash
-    npm install cors flask axios chakra vite
+    npm install cors flask axios chakra vite --save-dev jest @testing-library/react @testing-library/jest-dom @emailjs/browser
     ```
 
 ## Usage
