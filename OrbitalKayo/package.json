@@ -20,6 +20,7 @@
     "@emotion/styled": "^11.11.5",
     "amqplib": "^0.10.4",
     "axios": "^1.7.2",
+    "axios-mock-adapter": "^1.22.0",
     "chakra": "^0.0.3",
     "chatbox": "^0.0.1",
     "cors": "^2.8.5",
