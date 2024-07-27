@@ -56,7 +56,7 @@ cd KAYO
 
 4. Install the required Python packages:
     ```bash
-    pip install python-dotenv langchain langchain_community faiss-cpu -U sentence-transformers google-generativeai flask flask-cors pymongo textract langchain_core langchain_google_genai langchainhub
+    pip install faiss-cpu==1.8.0 flask==3.0.3 flask_cors==4.0.1 google-generativeai==0.7.2 langchain==0.2.11 langchain-community==0.2.10 langchainhub==0.1.20 langchain_core==0.2.24 langchain_google_genai==1.0.8 numpy==1.26.4 protobuf==4.25.4 pymongo==4.8.0 python-dotenv==1.0.1 sentence_transformers==3.0.1 textract==1.6.5
     ```
 
 ### 3. Set Up Node.js Environment
