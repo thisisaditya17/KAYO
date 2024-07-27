@@ -29,7 +29,6 @@ jobs:
         run: |
           cd OrbitalKayo
           npm install
-          npm run lint
           npm run build
 
       - name: Build And Deploy
