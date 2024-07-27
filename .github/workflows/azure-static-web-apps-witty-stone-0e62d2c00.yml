@@ -19,6 +19,11 @@ jobs:
         with:
           submodules: true
           lfs: false
+      
+      - name: print working directory and ls
+        run: |
+          pwd
+          ls
 
       - name: npm install, build, and test
         run: |
