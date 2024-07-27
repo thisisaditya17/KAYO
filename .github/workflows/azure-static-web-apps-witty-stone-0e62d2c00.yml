@@ -20,13 +20,14 @@ jobs:
           submodules: true
           lfs: false
       
-      - name: print working directory and ls
-        run: |
-          pwd
-          ls
+      # - name: print working directory and ls
+      #   run: |
+      #     pwd
+      #     ls
 
       - name: npm install, build, and test
         run: |
+          cd OrbitalKayo
           npm install
           npm run lint
           npm run build
