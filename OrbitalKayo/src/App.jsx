@@ -82,7 +82,7 @@ const App = () => {
     formData.append('mode', mode)
     setLoading(true)
     try {
-      const response = await axios.post('http://localhost:5001/upload', formData, {
+      const response = await axios.post('https://kayo.azurewebsites.net/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -118,7 +118,7 @@ const App = () => {
           KAYO - Know-It-All Yield Optimizer
         </Heading>
         <Center mt={4}>
-          <Image src="/assets/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150px" />
+          <Image src="./assets/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150px" />
         </Center>
       </Box>
       {uploaded ? (
