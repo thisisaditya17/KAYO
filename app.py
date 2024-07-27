@@ -232,4 +232,4 @@ def ask_question():
 
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True, host="0.0.0.0")
+    app.run(port=80, debug=True, host="0.0.0.0")
