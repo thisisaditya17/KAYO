@@ -118,7 +118,7 @@ const App = () => {
           KAYO - Know-It-All Yield Optimizer
         </Heading>
         <Center mt={4}>
-          <Image src="../assets/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150px" />
+          <Image src="assets/KAYO-removebg-preview.png" alt="KAYO Logo" boxSize="150px" />
         </Center>
       </Box>
       {uploaded ? (
