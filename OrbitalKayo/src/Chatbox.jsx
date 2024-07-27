@@ -19,7 +19,7 @@ const Chatbox = () => {
 
   const handleQuestion = async () => {
     try {
-      const response = await axios.post('http://localhost:5001/askQuestion', {
+      const response = await axios.post('https://kayo-66bo.onrender.com/askQuestion', {
         message: input,
       });
       const data = response.data;
