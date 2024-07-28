@@ -82,7 +82,7 @@ const App = () => {
     formData.append('mode', mode)
     setLoading(true)
     try {
-      const response = await axios.post('https://kayo-66bo.onrender.com/upload', formData, {
+      const response = await axios.post('https://kayo-backend.vercel.app/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
