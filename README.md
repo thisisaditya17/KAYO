@@ -66,7 +66,7 @@ cd KAYO
     ```
 2. Install the required Node.js packages:
     ```bash
-    npm install cors flask axios chakra vite --save-dev jest @testing-library/react @testing-library/jest-dom @emailjs/browser
+    npm install cors flask axios chakra vite dom --save-dev jest @testing-library/react @testing-library/jest-dom @emailjs/browser jest-environment-jsdom
     ```
 
 ## Usage
@@ -78,15 +78,18 @@ cd KAYO
     ```
 2. **Start the frontend server**:
     ```bash
-    # Ensure you're in the OrbitalKAYO directory
+    #Ensure you're in the OrbitalKAYO directory
     npm run dev
     ```
 
-## Running the RAG Check
-1. **Run the RAG_1.py file** to check if Retrieval-Augmented Generation (RAG) works fine:
+## Running the tests
+1. **For running tests:
     ```bash
-    python RAG_1.py
+    #Ensure you are in the OrbitalKAYO directory
+    npm run test
     ```
+    It should be 2 Test suites consisting of 11 tests.
+    
 ## Running the Jupyter Trial
 - To debug the RAG, run Jupyter **trial.ipynb**
 1. **Install Jupyter Notebook** (if not already installed):
