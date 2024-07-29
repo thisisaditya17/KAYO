@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
-  Text, FormLabel, FormControl, Box, Container, Center, Heading, Flex, Stack, Button,
+  Text, FormLabel, FormControl, Box, Center, Heading, Flex, Stack, Button,
   Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
   ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Progress
 } from '@chakra-ui/react'
@@ -122,14 +121,14 @@ const App = () => {
         </Center>
       </Box>
       {uploaded ? (
-        <>
+        <Box bg="gray.900" py={10} minH="78vh">
           <Chatbox />
           <Center mt={10}>
             <Button size="lg" colorScheme="orange" onClick={() => setUploaded(false)}>
               Upload New File
             </Button>
           </Center>
-        </>
+        </Box>
       ) : (
         <Center w="100vw" h="78vh" bg="gray.900" py={10}>
           <Flex direction="column" alignItems="center" w="full" maxW="xl" p={6} bg="gray.800" boxShadow="2xl" borderRadius="lg">

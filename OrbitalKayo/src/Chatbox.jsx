@@ -44,7 +44,7 @@ const Chatbox = () => {
   return (
     <>
 
-    <Flex direction="column" h="50vh" w="100%" p={4} bg="gray.900">
+    <Flex direction="column" h="65vh" w="100%" p={4} bg="gray.900">
       <Box
         flex="1"
         w="100%"
