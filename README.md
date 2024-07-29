@@ -83,7 +83,7 @@ cd KAYO
     ```
 
 ## Running the tests
-1. **For running tests:
+1. **For running tests:**
     ```bash
     #Ensure you are in the OrbitalKAYO directory
     npm run test
