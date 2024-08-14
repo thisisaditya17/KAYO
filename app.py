@@ -26,7 +26,7 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # MongoDB Configuration
-uri = "mongodb+srv://arnavmalhotra:LO22V321DrzXu3L9@trialserver.ynfu9nv.mongodb.net/?appName=TrialServer"
+uri = "mongodb+srv://arnav:arnav@trialserver.ynfu9nv.mongodb.net/?retryWrites=true&w=majority&appName=TrialServer"
 
 #Where to take 
 def get_database():

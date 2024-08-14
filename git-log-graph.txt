@@ -1,0 +1,112 @@
+* 274e85c Update README.md
+* 0f644c1 Update README.md
+* 8cd1d9e Final UI changes
+* c2009c0 testing implementation
+* a3d42a5 Proper Testing implementation
+| * 90fa476 Vercel trial
+| * 00792b8 modified icon and title
+| * 578dbca modified paths
+| * b64aac7 update port to env var PORT
+| * c862548 update port to 443
+| * 0668949 update port to 80
+| * 560f474 modified upload path, host. remove workflow
+| * 559a5be fix pip version
+| * ab18012 fix github workflow step
+| * 952269c add pip install step to workflow Add step to install pip < 24.1 to github workflow to prevent pip install error while installing textract: Requested textract==1.6.5 from https://files.pythonhosted.org/packages/6b/3e/ac16b6bf28edf78296aea7d0cb416b49ed30282ac8c711662541015ee6f3/textract-1.6.5-py3-none-any.whl (from -r requirements.txt (line 15)) has invalid metadata: .* suffix can only be used with `==` or `!=` operators     extract-msg (<=0.29.*)                  ~~~~~~~^ Please use pip<24.1 if you need to use this version.
+| * 8ef482e fixed requirements
+| *   c8763f9 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+| |\  
+| | * a272dc7 Add or update the Azure App Service build and deployment workflow config
+| * | 50f2bbe Add requirements
+| |/  
+| * aaa42cb Update paths
+| * b1028d8 Update App.jsx
+| * 1a487b3 Few changes
+| | * 5ed617a Rearranging the directories
+| | * 71986b5 Update azure-static-web-apps-witty-moss-0d3ee3700.yml
+| | *   1f6ce67 Merge branch 'deploy/azure-service-deployment' of https://github.com/thisisaditya17/KAYO into deploy/azure-service-deployment
+| | |\  
+| | | * 8160109 ci: add Azure Static Web Apps workflow file on-behalf-of: @Azure opensource@microsoft.com
+| | * | 87a5f6c Bug fixing
+| | |/  
+| | * d32555d refactor: edited setup file
+| | * 7ab6355 refactor: edited setup file
+| | * ae7849f refactor: added pwd and ls for pipeline
+| | * 56ee816 deploy: modified setup config yml file
+| |/  
+| * 30e25fd ci: add Azure Static Web Apps workflow file on-behalf-of: @Azure opensource@microsoft.com
+|/  
+* d704099 Reorganise
+* c8ba129 Update Readme
+* 555703f Loading Bar update
+* 785af0f Bug fixes
+* 2f5b946 UI  bug fixes
+* 1a89edd loading bar
+* 5354478 Added Logo
+* e5f6e47 Added custom modes
+*   a973775 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\  
+| * 0dd936d Update Jupyter trial.ipynb
+* | 1e0b846 New UI and bug fixrs
+|/  
+* 5886d51 Dark mode UI update
+* bafe5fa UI update
+*   504c0ed Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\  
+| * a7f6c2c open database
+* | 34b460a Few changes
+|/  
+* e0de8bd Update app.py
+*   ed8a126 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\  
+| * 9d12983 Update README.md
+| * 5808cf7 few changes
+| * 074c3fb milestone 2
+* | 918a955 Few changes and clean up
+|/  
+* 765a4f5 changes
+*   3ac6265 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\  
+| * 9026cd9 Added Untitled Diagram.drawio
+* | c1e92c5 Debugging the console
+|/  
+* b4598a6 Some changes in app.py
+* f9df59e Jupyther notebook included
+* f11c57a Changes in app.py to accomodate new RAG
+* 6144f6d New RAG Pipeline
+*   7386292 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\  
+| *   dd8b238 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+| |\  
+| * | 8cd87e8 full web app
+* | | be0a51a Trial and error
+| |/  
+|/|   
+* | 4e3e389 Few changes
+* |   49e6cd9 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+|\ \  
+| * | f3582e2 Update README.md
+| * | e5a21dc Update README.md
+| * | 69170e2 Update README.md
+| * | e28431e Update README.md
+| |/  
+* / e5ee156 Specified port
+|/  
+* 2461466 bug fixes
+* 4de324e Few more changes
+* 55689cd hi testing
+* 26cf76a Changes in app.py
+*   ce8cac5 Merge branch 'main' of github.com:thisisaditya17/KAYO
+|\  
+| *   fbc90f0 Merge branch 'main' of https://github.com/thisisaditya17/KAYO
+| |\  
+| * | 4ccb717 server made + responses set up
+* | | 8f6f299 Generate response using LLM
+| |/  
+|/|   
+* | 40a3e75 Similarity search working, install generative AI (Gemini)
+|/  
+* e2e4d1c website added
+* a79c7a0 Install langchain and embedding model in virtual env(excluded from repo) and testing model
+* 62e758c Add api key text file to repository
+* 4802723 Initial commit

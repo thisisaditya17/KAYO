@@ -1,5 +1,0 @@
-Communication between frontend and backend is usually handled by the HTTP protocol. Frontend sends a request to change resource or retrieve data, while backend returns appropriate results.
-
-In this form, when any changes occur on the backend, the frontend is not aware of them. As a result, in order to stay up-to-date, it is necessary to make requests at regular intervals and check if something has changed. This is not very convenient for users and unnecessarily burdens servers.
-
-An alternative method is to use two-way communication, such as with sockets. Then, when a resource changes on the backend side, we can send a message to the frontend. This can be a changed value or an info that something has changed and a request has to be made to be up-to-date. This way, the frontend will be notified when something actually changes and will not make unnecessary requests.

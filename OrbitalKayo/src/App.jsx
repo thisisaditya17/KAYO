@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import {
   Text, FormLabel, FormControl, Box, Center, Heading, Flex, Stack, Button,
-  Input, VStack, Select, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
-  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Progress
+  Input, VStack, Select, Textarea, useToast, Modal, ModalOverlay, ModalContent, ModalHeader,
+  ModalFooter, ModalBody, ModalCloseButton, useDisclosure, IconButton, Divider, Image, Progress,
+  HStack, RadioGroup, Radio
 } from '@chakra-ui/react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { AiOutlineUpload } from 'react-icons/ai'
@@ -18,7 +19,8 @@ const App = () => {
   const toast = useToast()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [feedback, setFeedback] = useState('')
-  const [message, setMessage] = useState('')
+  const [rating, setRating] = useState('5') // Default rating value
+  const [email, setEmail] = useState('')
   const [isLoading, setLoading] = useState(false)
 
   const feedbackSubmit = (event) => {
@@ -26,6 +28,8 @@ const App = () => {
 
     const templateParams = {
       feedback: feedback,
+      rating: rating,
+      email: email,
     }
 
     emailjs.send(
@@ -36,11 +40,23 @@ const App = () => {
     )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text)
-        setMessage('Feedback submitted successfully!')
+        toast({
+          title: 'Feedback submitted successfully!',
+          description: "Thank you for your feedback.",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
         onClose() // Close the modal after submitting the form
       }, (err) => {
         console.log('FAILED...', err)
-        setMessage('Failed to submit feedback.')
+        toast({
+          title: 'Failed to submit feedback.',
+          description: "Please try again later.",
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
       })
   }
 
@@ -186,19 +202,43 @@ const App = () => {
           <ModalCloseButton />
           <form onSubmit={feedbackSubmit}>
             <ModalBody>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel htmlFor="feedback">Feedback</FormLabel>
-                <Input
+                <Textarea
                   id="feedback"
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
                   placeholder="Enter your feedback"
                 />
               </FormControl>
+
+              <FormControl isRequired mt={4}>
+                <FormLabel htmlFor="rating">Rating</FormLabel>
+                <RadioGroup id="rating" onChange={setRating} value={rating}>
+                  <HStack spacing={4}>
+                    <Radio value="1">1</Radio>
+                    <Radio value="2">2</Radio>
+                    <Radio value="3">3</Radio>
+                    <Radio value="4">4</Radio>
+                    <Radio value="5">5</Radio>
+                  </HStack>
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel htmlFor="email">Email (optional)</FormLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                />
+              </FormControl>
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3} type="submit">
+              <Button colorScheme="orange" mr={3} type="submit">
                 Submit
               </Button>
               <Button onClick={onClose}>Cancel</Button>
@@ -206,8 +246,6 @@ const App = () => {
           </form>
         </ModalContent>
       </Modal>
-
-      {message && <Box mt={4} color="white" textAlign="center">{message}</Box>}
     </>
   )
 }
