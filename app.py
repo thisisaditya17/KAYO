@@ -26,7 +26,11 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # MongoDB Configuration
-uri = "mongodb+srv://arnav:arnav@trialserver.ynfu9nv.mongodb.net/?retryWrites=true&w=majority&appName=TrialServer"
+uri = os.getenv('MONGO_URI')
+
+if uri is None:
+    print("Error: MongoDB URI not found. Please set MONGO_URI in the .env file.")
+
 
 #Where to take 
 def get_database():
