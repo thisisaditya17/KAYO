@@ -8,10 +8,24 @@
 - Reliable query responses
 - Suitable for academic, research, and professional use
 
+Documentation link for KAYO: [Documentation](https://docs.google.com/document/d/1yDoQwExPGX44d3oOyRDdck30Ket5GX5nVnifOyqAVz0/edit?tab=t.0)
+
 ## Prerequisites
 - [Python 3.9+](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/)
 - [MongoDB](https://www.mongodb.com/)
+
+## Note
+Currently, KAYO is not fully functional because the MongoDB server URI has been removed. You will need to provide your own MongoDB URI in the `.env` file.
+
+### MongoDB URI Setup
+1. Create a **.env** file in the project root.
+2. Add your MongoDB URI to the **.env** file as follows:
+    ```bash
+    MONGO_URI="your_mongodb_uri"
+    ```
+
+Make sure your MongoDB instance is accessible and running properly.
 
 ## How to Run the Project
 
@@ -46,6 +60,7 @@ cd KAYO
         ```bash
         GENAI_API_KEY="your api key"
         GENAI_2ND_KEY="other api key"
+        MONGO_URI="your_mongodb_uri"
         ```
     4. If you still face issues, try:
         - **Windows**:
@@ -123,3 +138,4 @@ For any inquiries or issues, please contact:
 - [Aditya](mailto:joshi.adi1734@gmail.com)
 - [Arnav](mailto:arnav.malhotra20003@gmail.com)
 
+--- 
